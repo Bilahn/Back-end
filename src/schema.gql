@@ -1,0 +1,35 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Clients {
+  id: Int!
+  name: String!
+  lastname: String!
+  username: String!
+  email: String!
+  password: String!
+}
+
+type Query {
+  sayHello: String!
+}
+
+type Mutation {
+  register(createClientInput: CreateClientsInput!): Clients!
+  login(loginClientsInput: LoginClientsInput!): String!
+}
+
+input CreateClientsInput {
+  name: String!
+  lastname: String!
+  username: String!
+  email: String!
+  password: String!
+  confirmPassword: String!
+}
+
+input LoginClientsInput {
+  email: String!
+  password: String!
+}
