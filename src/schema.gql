@@ -8,16 +8,20 @@ type Clients {
   lastname: String!
   username: String!
   email: String!
-  password: String!
+}
+
+type UserToken {
+  token: String!
+  client: Clients!
 }
 
 type Query {
-  sayHello: String!
+  me: String!
 }
 
 type Mutation {
   register(createClientInput: CreateClientsInput!): Clients!
-  login(loginClientsInput: LoginClientsInput!): String!
+  login(loginClientsInput: LoginClientsInput!): UserToken!
 }
 
 input CreateClientsInput {
