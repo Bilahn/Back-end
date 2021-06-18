@@ -28,7 +28,6 @@ export class Clients {
     email : string ; 
 
     @Column()
-    @Field()
     password : string ; 
 
 }

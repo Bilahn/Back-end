@@ -5,7 +5,11 @@ import { ClientsModule } from './clients/clients.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm'; 
-import { AuthModule } from './auth/auth.module';
+import { BookingModule } from './booking/booking.module';
+import { MaidModule } from './maid/maid.module';
+import { SpacesModule } from './spaces/spaces.module';
+
+
 
 
 @Module({
@@ -22,8 +26,9 @@ import { AuthModule } from './auth/auth.module';
     }),
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      // context : ({req}) => ({ headers : req.headers })
     })
-    ,ClientsModule, AuthModule],
+    ,ClientsModule, BookingModule, MaidModule, SpacesModule],
   controllers: [AppController],
   providers: [AppService],
 })
