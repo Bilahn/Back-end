@@ -7,14 +7,14 @@ import * as  bcrypt from "bcrypt" ;
 import { LoginClientsInput } from './dto/login-clients.input';
 import { JwtService } from '@nestjs/jwt';
 import { UserToken } from './userToken.entity';
-import { JwtDto } from './dto/jwt.dto';
+
 
 
 
 @Injectable()
 export class ClientsService {
   constructor(
-    @InjectRepository(Clients) private clientsRepository: Repository<Clients>,
+    @InjectRepository(Clients) public clientsRepository: Repository<Clients>,
     private readonly jwtService : JwtService
   ) {}
 
@@ -28,13 +28,13 @@ export class ClientsService {
 
 
   async register(createClientInput: CreateClientsInput): Promise<any> {
-    const foundUser = await this.clientsRepository.findOne({username : createClientInput.username})
+    const foundUser = await this.clientsRepository.findOne({email : createClientInput.email})
     if(foundUser){
-      return new ConflictException('User already exists try with another username')
+      return new ConflictException(`Hello Mr(s) ${createClientInput.name} you already have an account!`)
     }
-    if(createClientInput.password !== createClientInput.confirmPassword){
-      return new ForbiddenException('Passwords dosent matches try to focus please!')
-    }
+    // if(createClientInput.password !== createClientInput.confirmPassword){
+    //   return new ForbiddenException('Passwords dosent matches try to focus please!')
+    // }
     else {
       const hashedPassword = await bcrypt.hash(createClientInput.password,12); 
       const newUser = await this.clientsRepository.create({...createClientInput,password : hashedPassword});
@@ -67,12 +67,16 @@ export class ClientsService {
   }
 
    signToken(id : number) {
-    const payload : JwtDto = { clientId : id }
+    const payload  = { clientId : id }
     return this.jwtService.sign(payload)
   }
 
-  async validateClient(clientId : number) {
-    return this.clientsRepository.findOne({ id : clientId})
+  async validateClient(payload) {
+    return this.clientsRepository.findOne(payload)
+  }
+
+  async findClientById(id){
+    return this.clientsRepository.findOne({id : id})
   }
   
 }
