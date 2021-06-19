@@ -15,13 +15,34 @@ type UserToken {
   client: Clients!
 }
 
+type Booking {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Maid {
+  id: Int!
+  name: String!
+  lastname: String!
+  salary: Float
+  email: String
+  Available: Boolean!
+}
+
 type Query {
   me: String!
+  booking(id: Int!): Booking!
+  maids: [Maid!]!
 }
 
 type Mutation {
   register(createClientInput: CreateClientsInput!): Clients!
   login(loginClientsInput: LoginClientsInput!): UserToken!
+  createBooking(createBookingInput: CreateBookingInput!): Booking!
+  updateBooking(updateBookingInput: UpdateBookingInput!): Booking!
+  removeBooking(id: Int!): Booking!
+  updateMaid(updateMaidInput: UpdateMaidInput!): Maid!
+  removeMaid(id: Int!): Maid!
 }
 
 input CreateClientsInput {
@@ -36,4 +57,21 @@ input CreateClientsInput {
 input LoginClientsInput {
   email: String!
   password: String!
+}
+
+input CreateBookingInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateBookingInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateMaidInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
