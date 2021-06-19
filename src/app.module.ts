@@ -6,8 +6,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm'; 
 import { BookingModule } from './booking/booking.module';
-import { MaidModule } from './maid/maid.module';
-import { SpacesModule } from './spaces/spaces.module';
+
+
 
 
 
@@ -28,8 +28,9 @@ import { SpacesModule } from './spaces/spaces.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       // context : ({req}) => ({ headers : req.headers })
     })
-    ,ClientsModule, BookingModule, MaidModule, SpacesModule],
+    ,ClientsModule, BookingModule],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+ 

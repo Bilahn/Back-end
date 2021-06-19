@@ -2,12 +2,22 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Booking {
+  id: Int!
+  date: String!
+  duration: String!
+  type: String!
+  adresse: String!
+  space: String!
+  clientId: Int
+  client: Clients
+}
+
 type Clients {
   id: Int!
   name: String!
-  lastname: String!
-  username: String!
   email: String!
+  booking: [Booking!]
 }
 
 type UserToken {
@@ -17,23 +27,34 @@ type UserToken {
 
 type Query {
   me: String!
+  getClients: Clients!
+  booking: [Booking!]!
+  bookingByClient: [Booking!]!
 }
 
 type Mutation {
   register(createClientInput: CreateClientsInput!): Clients!
   login(loginClientsInput: LoginClientsInput!): UserToken!
+  createBooking(createBookingInput: CreateBookingInput!): Booking!
 }
 
 input CreateClientsInput {
   name: String!
-  lastname: String!
-  username: String!
   email: String!
+  phoneNumber: Float!
   password: String!
-  confirmPassword: String!
 }
 
 input LoginClientsInput {
   email: String!
   password: String!
+}
+
+input CreateBookingInput {
+  date: String!
+  duration: String!
+  type: String!
+  adresse: String!
+  space: String!
+  description: String!
 }

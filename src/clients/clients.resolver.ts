@@ -12,17 +12,21 @@ import { CtxClient } from 'src/decoraters/ctx-user.decorator';
 @Resolver(of => Clients)
 export class ClientsResolver {
     constructor(private clientService : ClientsService) {} 
-   
   @UseGuards(GqlAuthGuard)
   @Query(()=>String)
   me(@CtxClient() client : Clients ){
-    console.log(client)
     return "hello"
   }
 
-    @Mutation(()=>Clients)
-    register(@Args('createClientInput') createClientsInput : CreateClientsInput ) : Promise<Clients> {
+  @Mutation(()=>Clients)
+  register(@Args('createClientInput') createClientsInput : CreateClientsInput ) : Promise<Clients> {
         return this.clientService.register(createClientsInput) 
+  }
+
+  @UseGuards(GqlAuthGuard)
+    @Query(()=>Clients)
+    getClients(@CtxClient() client : Clients ){
+      return this.clientService.findClientById(client.id) 
     }
 
 

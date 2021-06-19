@@ -1,5 +1,6 @@
 import { ObjectType , Field , Int } from "@nestjs/graphql";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Booking } from "src/booking/entities/booking.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
 
@@ -15,13 +16,13 @@ export class Clients {
     @Field()
     name : string ; 
 
-    @Column()
-    @Field() 
-    lastname : string ; 
+    // @Column()
+    // @Field() 
+    // lastname : string ; 
 
-    @Column()
-    @Field()
-    username : string ; 
+    // @Column()
+    // @Field()
+    // username : string ; 
 
     @Column()
     @Field()
@@ -29,5 +30,13 @@ export class Clients {
 
     @Column()
     password : string ; 
+
+
+    @Column() 
+    phoneNumber : number 
+
+    @OneToMany(()=> Booking ,booking => booking.client )
+    @Field(type => [Booking] , {nullable : true })
+    booking?: Booking[]
 
 }
