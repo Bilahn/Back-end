@@ -16,7 +16,7 @@ export class BookingResolver {
   @Mutation(() => Booking)
   createBooking(@Args('createBookingInput') createBookingInput: CreateBookingInput, @CtxClient() client : Clients) {
     console.log(createBookingInput)
-    let payload = {...createBookingInput,client,clientId : client.id}
+    let payload = {...createBookingInput, client : client ,clientId : client.id}
     return this.bookingService.create(payload);
   }
 
@@ -30,21 +30,9 @@ export class BookingResolver {
   @UseGuards(GqlAuthGuard)
   @Query(() => [Booking], { name: 'bookingByClient' })
   findByClient(@CtxClient() client : Clients) {
+    console.log(client)
     return this.bookingService.findByClient(client.id)
   }
 
-  // @Query(() => Booking, { name: 'booking' })
-  // findOne(@Args('id', { type: () => Int }) id: number) {
-  //   return this.bookingService.findOne(id);
-  // }
-
-  // @Mutation(() => Booking)
-  // updateBooking(@Args('updateBookingInput') updateBookingInput: UpdateBookingInput) {
-  //   return this.bookingService.update(updateBookingInput.id, updateBookingInput);
-  // }
-
-  // @Mutation(() => Booking)
-  // removeBooking(@Args('id', { type: () => Int }) id: number) {
-  //   return this.bookingService.remove(id);
-  // }
+  
 }

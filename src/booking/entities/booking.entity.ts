@@ -43,9 +43,6 @@ export class Booking {
   @Field()
   space : string 
 
-  // @Column()
-  // @Field({nullable:true})
-  // description?: string 
 
   @Column()
   @Field(type => Int,{nullable:true})

@@ -9,6 +9,7 @@ export class BookingService {
   constructor(@InjectRepository(Booking) private bookingRepository : Repository<Booking>  ) {}
 
   create(createBookingInput: CreateBookingInput) {
+    console.log(createBookingInput)
     const newBooking = this.bookingRepository.create(createBookingInput)
 
     return this.bookingRepository.save(newBooking) 
@@ -19,18 +20,7 @@ export class BookingService {
   }
 
   findByClient(clientId) {
-    return this.bookingRepository.find({clientId})
+    return this.bookingRepository.find({ where : { clientId : clientId } })
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} booking`;
-  // }
-
-  // update(id: number, updateBookingInput: UpdateBookingInput) {
-  //   return `This action updates a #${id} booking`;
-  // }
-
-  // remove(id: number) {
-  //   return `This action removes a #${id} booking`;
-  // }
 }
