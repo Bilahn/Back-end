@@ -16,14 +16,6 @@ export class Clients {
     @Field()
     name : string ; 
 
-    // @Column()
-    // @Field() 
-    // lastname : string ; 
-
-    // @Column()
-    // @Field()
-    // username : string ; 
-
     @Column()
     @Field()
     email : string ; 

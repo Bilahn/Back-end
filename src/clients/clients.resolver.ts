@@ -12,10 +12,10 @@ import { CtxClient } from 'src/decoraters/ctx-user.decorator';
 @Resolver(of => Clients)
 export class ClientsResolver {
     constructor(private clientService : ClientsService) {} 
-  @UseGuards(GqlAuthGuard)
+ 
   @Query(()=>String)
-  me(@CtxClient() client : Clients ){
-    return "hello"
+  me(){
+    return "hello Apollo Client graphql and react native let's start working"
   }
 
   @Mutation(()=>Clients)
