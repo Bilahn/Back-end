@@ -24,8 +24,8 @@ export class Clients {
     password : string ; 
 
 
-    @Column() 
-    phoneNumber : number 
+    @Column({nullable : true}) 
+    phoneNumber : number ; 
 
     @OneToMany(()=> Booking ,booking => booking.client )
     @Field(type => [Booking] , {nullable : true })

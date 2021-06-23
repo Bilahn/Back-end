@@ -26,7 +26,6 @@ type UserToken {
 }
 
 type Query {
-  me: String!
   getClients: Clients!
   booking: [Booking!]!
   bookingByClient: [Booking!]!
@@ -57,4 +56,9 @@ input CreateBookingInput {
   adresse: String!
   space: String!
   description: String!
+}
+
+type Subscription {
+  me: String!
+  userAdded: Clients!
 }
