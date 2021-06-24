@@ -1,5 +1,5 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
-import { Clients } from 'src/clients/clients.entity';
+
 
 @InputType()
 export class CreateBookingInput {

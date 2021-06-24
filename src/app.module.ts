@@ -6,7 +6,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm'; 
 import { BookingModule } from './booking/booking.module';
-import { MaidModule } from './maid/maid.module';
+
 
 
 
@@ -30,7 +30,7 @@ import { MaidModule } from './maid/maid.module';
       installSubscriptionHandlers: true
      // context : ({req}) => ({ headers : req.headers })
     })
-    ,ClientsModule, BookingModule, MaidModule],
+    ,ClientsModule, BookingModule],
   controllers: [AppController],
   providers: [AppService],
 })

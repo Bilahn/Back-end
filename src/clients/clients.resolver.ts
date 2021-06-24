@@ -16,10 +16,7 @@ const pubsub = new PubSub()
 export class ClientsResolver {
     constructor(private clientService : ClientsService) {} 
  
-@Subscription(returns => String)
-  me(){
-   return pubsub.asyncIterator('commentAdded');
-}
+
 
   @Mutation(()=>Clients)
   register(@Args('createClientInput') createClientsInput : CreateClientsInput ) : Promise<Clients>  {
@@ -34,7 +31,6 @@ export class ClientsResolver {
     return pubsub.asyncIterator('userAdded!')
   }
 
-
   @UseGuards(GqlAuthGuard)
     @Query(()=>Clients)
     getClients(@CtxClient() client : Clients ){
@@ -44,6 +40,7 @@ export class ClientsResolver {
 
    @Mutation(()=>UserToken)
    login(@Args('loginClientsInput') loginClientsInput : LoginClientsInput) : Promise<UserToken> {
+     console.log(loginClientsInput)
            return this.clientService.login(loginClientsInput) ; 
    }
 

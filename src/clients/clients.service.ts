@@ -33,9 +33,6 @@ export class ClientsService {
       throw new ConflictException(`Hello Mr(s) ${createClientInput.name} you already have an account!`)
       
     }
-    // if(createClientInput.password !== createClientInput.confirmPassword){
-    //   return new ForbiddenException('Passwords dosent matches try to focus please!')
-    // }
     else {
       const hashedPassword = await bcrypt.hash(createClientInput.password,12); 
       const newUser = await this.clientsRepository.create({...createClientInput,password : hashedPassword});

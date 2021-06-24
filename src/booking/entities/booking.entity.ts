@@ -19,17 +19,13 @@ export class Booking {
   @Field()
   duration : string 
 
-  // @Column()
-  // @Field(type=>Int , { nullable : true })
-  // rating : number
+  @Column()
+  @Field({nullable : true})
+  status : string 
 
-  // @Column()
-  // @Field({nullable : true})
-  // status : string 
-
-  // @Column()
-  // @Field(type=>Int,{ nullable : true })
-  // price : number 
+  @Column()
+  @Field(type=>Int,{ nullable : true })
+  price : number 
 
   @Column()
   @Field()
@@ -49,6 +45,6 @@ export class Booking {
   clientId?: number ; 
 
   @ManyToOne(()=> Clients , client => client.booking )
-  @Field(type=>Clients,{nullable:true})
+  @Field(type=>Clients ,{nullable:true})
   client?: Clients 
 }
