@@ -24,7 +24,8 @@ export class Clients {
     password : string ; 
 
 
-    @Column({nullable : true}) 
+    @Column() 
+    @Field()
     phoneNumber : number ; 
 
     @OneToMany(()=> Booking ,booking => booking.client )

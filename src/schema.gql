@@ -6,6 +6,8 @@ type Booking {
   id: Int!
   date: String!
   duration: String!
+  status: String
+  price: Int
   type: String!
   adresse: String!
   space: String!
@@ -17,6 +19,7 @@ type Clients {
   id: Int!
   name: String!
   email: String!
+  phoneNumber: Float!
   booking: [Booking!]
 }
 
@@ -59,6 +62,5 @@ input CreateBookingInput {
 }
 
 type Subscription {
-  me: String!
   userAdded: Clients!
 }
