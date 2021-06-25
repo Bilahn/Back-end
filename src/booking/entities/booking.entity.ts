@@ -16,15 +16,15 @@ export class Booking {
   date :string 
 
   @Column()
+  @Field(type=>Int)
+  duration : number 
+
+  @Column({default: "Not Completed!"})
   @Field()
-  duration : string 
+  status?: string ; 
 
   @Column()
-  @Field({nullable : true})
-  status : string 
-
-  @Column()
-  @Field(type=>Int,{ nullable : true })
+  @Field(type=>Int)
   price : number 
 
   @Column()
@@ -38,7 +38,6 @@ export class Booking {
   @Column()
   @Field()
   space : string 
-
 
   @Column()
   @Field(type => Int,{nullable:true})
