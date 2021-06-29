@@ -9,22 +9,18 @@ import { UserToken } from './userToken.entity';
 import { CtxClient } from 'src/decoraters/ctx-user.decorator';
 import { PubSub } from 'graphql-subscriptions';
 
-
 const pubsub = new PubSub()
 
 @Resolver(of => Clients)
 export class ClientsResolver {
     constructor(private clientService : ClientsService) {} 
  
-
-
   @Mutation(()=>Clients)
   register(@Args('createClientInput') createClientsInput : CreateClientsInput ) : Promise<Clients>  {
       pubsub.publish('userAdded!' , { userAdded : createClientsInput })
     console.log(createClientsInput)
         return this.clientService.register(createClientsInput) 
   }
-
 
   @Subscription(()=>Clients)
   userAdded(){
@@ -33,10 +29,9 @@ export class ClientsResolver {
 
   @UseGuards(GqlAuthGuard)
     @Query(()=>Clients)
-    getClients(@CtxClient() client : Clients ){
+    getClientById(@CtxClient() client : Clients ){
       return this.clientService.findClientById(client.id) 
     }
-
 
    @Mutation(()=>UserToken)
    login(@Args('loginClientsInput') loginClientsInput : LoginClientsInput) : Promise<UserToken> {
