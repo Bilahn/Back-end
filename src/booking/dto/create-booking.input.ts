@@ -6,17 +6,17 @@ export class CreateBookingInput {
   @Field()
   date :string 
 
-  @Field(type=>Int)
-  duration : number  
+  // @Field(type=>Int)
+  // duration : number  
 
   @Field()
   type : string 
 
-  @Field()
-  adresse : string 
+  // @Field()
+  // adresse : string 
 
-  @Field()
-  space : string 
+  // @Field()
+  // space : string 
 
   @Field()
   description?: string
