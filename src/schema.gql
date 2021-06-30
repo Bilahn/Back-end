@@ -5,11 +5,8 @@
 type Booking {
   id: Int!
   date: String!
-  duration: String!
+  price: Int!
   type: String!
-  adresse: String!
-  space: String!
-  clientId: Int
   client: Clients
 }
 
@@ -17,6 +14,7 @@ type Clients {
   id: Int!
   name: String!
   email: String!
+  phoneNumber: Float!
   booking: [Booking!]
 }
 
@@ -26,8 +24,7 @@ type UserToken {
 }
 
 type Query {
-  me: String!
-  getClients: Clients!
+  getClientById: Clients!
   booking: [Booking!]!
   bookingByClient: [Booking!]!
 }
@@ -52,9 +49,11 @@ input LoginClientsInput {
 
 input CreateBookingInput {
   date: String!
-  duration: String!
   type: String!
-  adresse: String!
-  space: String!
   description: String!
+  price: Int!
+}
+
+type Subscription {
+  userAdded: Clients!
 }

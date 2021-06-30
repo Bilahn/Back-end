@@ -1,6 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Clients } from 'src/clients/clients.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 
 
@@ -15,40 +15,35 @@ export class Booking {
   @Field()
   date :string 
 
+  // @Column()
+  // @Field(type=>Int)
+  // duration : number 
+
+  // @Column({default: "Not Completed!"})
+  // @Field()
+  // status?: string ; 
+
   @Column()
-  @Field()
-  duration : string 
-
-  // @Column()
-  // @Field(type=>Int , { nullable : true })
-  // rating : number
-
-  // @Column()
-  // @Field({nullable : true})
-  // status : string 
-
-  // @Column()
-  // @Field(type=>Int,{ nullable : true })
-  // price : number 
+  @Field(type=>Int)
+  price : number 
 
   @Column()
   @Field()
   type : string 
 
-  @Column()
-  @Field()
-  adresse : string 
+  // @Column()
+  // @Field()
+  // adresse : string 
 
-  @Column()
-  @Field()
-  space : string 
+  // @Column()
+  // @Field()
+  // space : string 
 
-
-  @Column()
-  @Field(type => Int,{nullable:true})
-  clientId?: number ; 
+  // @Column()
+  // @Field(type => Int,{nullable:true})
+  // clientId?: number ; 
 
   @ManyToOne(()=> Clients , client => client.booking )
-  @Field(type=>Clients,{nullable:true})
+  @Field(type=>Clients ,{nullable:true})
   client?: Clients 
 }

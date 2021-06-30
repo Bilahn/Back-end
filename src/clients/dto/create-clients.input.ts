@@ -10,20 +10,6 @@ export class CreateClientsInput {
     @MaxLength(20)
     @Field() 
     name : string ;
-    
-    // @IsString()
-    // @MinLength(4)
-    // @MaxLength(20)
-    // @Field()
-    // lastname : string ; 
-
-
-    
-    // @IsString()
-    // @MinLength(4)
-    // @MaxLength(20)
-    // @Field() 
-    // username : string ; 
 
 
 
@@ -41,10 +27,6 @@ export class CreateClientsInput {
     @Field() 
     password : string ; 
 
-    // @IsString()
-    // @MinLength(4)
-    // @MaxLength(20)
-    // @Field()  
-    // confirmPassword : string ; 
+   
 
 }

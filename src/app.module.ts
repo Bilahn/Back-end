@@ -12,6 +12,7 @@ import { BookingModule } from './booking/booking.module';
 
 
 
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -26,7 +27,8 @@ import { BookingModule } from './booking/booking.module';
     }),
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      // context : ({req}) => ({ headers : req.headers })
+      installSubscriptionHandlers: true
+     // context : ({req}) => ({ headers : req.headers })
     })
     ,ClientsModule, BookingModule],
   controllers: [AppController],

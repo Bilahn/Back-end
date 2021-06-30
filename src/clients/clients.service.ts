@@ -1,4 +1,4 @@
-import { ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, ForbiddenException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Clients } from './clients.entity';
@@ -30,11 +30,9 @@ export class ClientsService {
   async register(createClientInput: CreateClientsInput): Promise<any> {
     const foundUser = await this.clientsRepository.findOne({email : createClientInput.email})
     if(foundUser){
-      return new ConflictException(`Hello Mr(s) ${createClientInput.name} you already have an account!`)
+      throw new ConflictException(`Hello Mr(s) ${createClientInput.name} you already have an account!`)
+      
     }
-    // if(createClientInput.password !== createClientInput.confirmPassword){
-    //   return new ForbiddenException('Passwords dosent matches try to focus please!')
-    // }
     else {
       const hashedPassword = await bcrypt.hash(createClientInput.password,12); 
       const newUser = await this.clientsRepository.create({...createClientInput,password : hashedPassword});

@@ -16,7 +16,7 @@ export class BookingResolver {
   @Mutation(() => Booking)
   createBooking(@Args('createBookingInput') createBookingInput: CreateBookingInput, @CtxClient() client : Clients) {
     console.log(createBookingInput)
-    let payload = {...createBookingInput, client : client ,clientId : client.id}
+    let payload = {...createBookingInput, client}
     return this.bookingService.create(payload);
   }
 
@@ -34,5 +34,4 @@ export class BookingResolver {
     return this.bookingService.findByClient(client.id)
   }
 
-  
 }
