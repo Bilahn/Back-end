@@ -31,6 +31,9 @@ export class Booking {
   @Field()
   type : string 
 
+ @Column()
+  @Field()
+  description : string 
   // @Column()
   // @Field()
   // adresse : string 
