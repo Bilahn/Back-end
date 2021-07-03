@@ -6,6 +6,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm'; 
 import { BookingModule } from './booking/booking.module';
+import { GoogleStrategy } from './strategy/google.strategy';
+// import { FacebookStrategy } from './strategy/facebook.strategy'
 
 
 
@@ -27,12 +29,12 @@ import { BookingModule } from './booking/booking.module';
     }),
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      installSubscriptionHandlers: true
+      installSubscriptionHandlers: true,
      // context : ({req}) => ({ headers : req.headers })
     })
     ,ClientsModule, BookingModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,GoogleStrategy],
 })
 export class AppModule {}
  

@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int , Subscription } from '@nestjs/graphql';
 import { BookingService } from './booking.service';
 import { Booking } from './entities/booking.entity';
 import { CreateBookingInput } from './dto/create-booking.input';
@@ -6,6 +6,9 @@ import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../guards/gql-auth.guards'
 import { CtxClient } from 'src/decoraters/ctx-user.decorator';
 import { Clients } from 'src/clients/clients.entity';
+import { PubSub } from 'graphql-subscriptions';
+
+const pubsub = new PubSub()
 
 @Resolver(() => Booking)
 export class BookingResolver {
@@ -15,15 +18,15 @@ export class BookingResolver {
   @UseGuards(GqlAuthGuard)
   @Mutation(() => Booking)
   createBooking(@Args('createBookingInput') createBookingInput: CreateBookingInput, @CtxClient() client : Clients) {
-    console.log(createBookingInput)
+    // pubsub.publish('bookingAdded' , { bookingAdded : createBookingInput })
+    console.log("thebooknig",createBookingInput)
     let payload = {...createBookingInput, client}
     return this.bookingService.create(payload);
   }
 
-  @UseGuards(GqlAuthGuard)
+  // @UseGuards(GqlAuthGuard,)
   @Query(() => [Booking], { name: 'booking' })
-  findAll(@CtxClient() client : Clients ) {
-    console.log(client)
+  findAll() {
     return this.bookingService.findAll();
   }
 
@@ -34,4 +37,9 @@ export class BookingResolver {
     return this.bookingService.findByClient(client.id)
   }
 
+  
+  @Subscription(()=>Booking)
+  bookingAdded(){
+    return pubsub.asyncIterator('bookingAdded')
+  }
 }

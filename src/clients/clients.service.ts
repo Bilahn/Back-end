@@ -76,5 +76,18 @@ export class ClientsService {
   async findClientById(id){
     return this.clientsRepository.findOne({id : id})
   }
+
+  async updateById(id,clientInput){
+  const newuser = await  this.clientsRepository.update({id : id }, {
+    name : clientInput.name , 
+    email : clientInput.email , 
+    phoneNumber : clientInput.phoneNumber
+  })
+  return "DONE"
+  }
+
+  async findAll(){
+    return this.clientsRepository.find()
+  }
   
 }

@@ -26,12 +26,14 @@ type UserToken {
 
 type Query {
   getClientById: Clients!
+  allClients: [Clients!]!
   booking: [Booking!]!
   bookingByClient: [Booking!]!
 }
 
 type Mutation {
   register(createClientInput: CreateClientsInput!): Clients!
+  updateClient(update: ClientUpdateInput!): String!
   login(loginClientsInput: LoginClientsInput!): UserToken!
   createBooking(createBookingInput: CreateBookingInput!): Booking!
 }
@@ -41,6 +43,12 @@ input CreateClientsInput {
   email: String!
   phoneNumber: Float!
   password: String!
+}
+
+input ClientUpdateInput {
+  name: String!
+  email: String
+  phoneNumber: Float
 }
 
 input LoginClientsInput {
@@ -56,5 +64,5 @@ input CreateBookingInput {
 }
 
 type Subscription {
-  userAdded: Clients!
+  bookingAdded: Booking!
 }
